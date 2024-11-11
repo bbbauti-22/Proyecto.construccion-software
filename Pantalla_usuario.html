@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Lista de Turnos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .turno {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .turno-info {
+            text-align: left;
+            font-size: 14px;
+        }
+
+        input[type="radio"] {
+            width: 18px;
+            height: 18px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #ffffff;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Turnos</h2>
+
+        <!-- Turnos Cancha 1 -->
+        <div class="turno">
+            <label class="turno-info">
+                <input type="radio" name="turno" value="2024-11-11-20:00-cancha1">
+                Lunes 11/11/24 - Cancha N°1 - 20:00 hs
+            </label>
+        </div>
+
+        <div class="turno">
+            <label class="turno-info">
+                <input type="radio" name="turno" value="2024-11-12-18:00-cancha1">
+                Martes 12/11/24 - Cancha N°1 - 18:00 hs
+            </label>
+        </div>
+
+        <div class="turno">
+            <label class="turno-info">
+                <input type="radio" name="turno" value="2024-11-13-19:00-cancha1">
+                Miércoles 13/11/24 - Cancha N°1 - 19:00 hs
+            </label>
+        </div>
+
+        <div class="turno">
+            <label class="turno-info">
+                <input type="radio" name="turno" value="2024-11-14-20:00-cancha1">
+                Jueves 14/11/24 - Cancha N°1 - 20:00 hs
+            </label>
+        </div>
+
+        <!-- Turnos Cancha 2 -->
+        <div class="turno">
+            <label class="turno-info">
+                <input type="radio" name="turno" value="2024-11-11-17:00-cancha2">
+                Lunes 11/11/24 - Cancha N°2 - 17:00 hs
+            </label>
+        </div>
+
+        <div class="turno">
+            <label class="turno-info">
+                <input type="radio" name="turno" value="2024-11-12-19:00-cancha2">
+                Martes 12/11/24 - Cancha N°2 - 19:00 hs
+            </label>
+        </div>
+
+        <div class="turno">
+            <label class="turno-info">
+                <input type="radio" name="turno" value="2024-11-13-20:00-cancha2">
+                Miércoles 13/11/24 - Cancha N°2 - 20:00 hs
+            </label>
+        </div>
+
+        
+
+        <!-- Botón de Reservar -->
+        <button type="button" onclick="reservarTurno()">Reservar</button>
+    </div>
+
+    <script>
+        function reservarTurno() {
+            const selectedTurno = document.querySelector('input[name="turno"]:checked');
+            if (selectedTurno) {
+                alert("Has reservado el turno: " + selectedTurno.value);
+            } else {
+                alert("Por favor, selecciona un turno para reservar.");
+            }
+        }
+    </script>
+</body>
+</html>

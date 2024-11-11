@@ -1,0 +1,51 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
+
+/**
+* get random number.
+* @param {number} min - min number.
+* @param {number} max - max number.
+*/
+
+
+/*
+* variable
+*/
+html,
+body{
+    height:100vh;
+    width: 120vw;
+}
+body{
+    font-family: 'Monserrat' , sans-serif ;
+    background: #fff;
+    position:relative ;
+    overflow:hidden;
+    font-size:large 100%;
+    text-align: center;
+}
+.criterion{
+    font-size: 1.6rem;
+    position: absolute;
+    top:50%;
+    left:50%;
+    height:0;
+    width:0;
+    transform: translate (-26px, -26px)
+
+}
+
+.background{
+    position: absolute;
+    top: 0;
+    height: 100vh ;
+    width: 0;
+    -webkit-animation: background-animation 2s ease-in-out ;
+            animation: background-animation 2s ease-in-out ;
+
+}
+.background0{
+    left: 0% ;
+    height:100vh;
+    
+}

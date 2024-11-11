@@ -1,0 +1,21 @@
+main{
+    display:grid ;
+    grid-template-areas: "header header header" ,
+    "content content aside aside" ,"footer footer footer";
+}
+
+header{
+    grid-area: header ;
+}
+
+article{
+    grid-area:article
+
+}
+aside{
+    grid-area: aside;
+}
+footer{
+    grid-area: foot;
+}
+

@@ -1,0 +1,11 @@
+#contenedor{
+    height:80px;
+    background: gold;
+    display: flex;
+    flex-direction: colum;
+    align-items:center;
+    justify-content:space-evenly ;
+    flex-direction: column-reverse;
+    flex-direction: row;
+    flex-direction: row-reverse;
+}

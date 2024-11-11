@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pantalla de Prueba</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e9ecef;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            height: 350x;
+            width: 800px; /* Ancho fijo */
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #666;
+            font-size: 16px;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #5cb85c;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        a:hover {
+            background-color: #4cae4c;
+        }
+        .crud-container {
+            margin-top: 20px;
+            text-align: left;
+        }
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        .item {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .item button {
+            background-color: #d9534f; /* Rojo para eliminar */
+        }
+        .item button:hover {
+            background-color: #c9302c;
+        }
+        .edit-button {
+            background-color: #5bc0de; /* Color diferente para editar */
+        }
+        .edit-button:hover {
+            background-color: #31b0d5;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="crud-container">
+            <h1>Bienvenido al sistema de canchas COZ</h1>
+          
+            <input type="text" id="FechaInput" placeholder="Fecha" required>
+            <input type="text" id="HorarioInput" placeholder="Horario" required>
+            <input type="text" id="TipoCanchaInput" placeholder="Tipo de Cancha" required>
+            <button id="addButton">Agregar</button>
+
+            <div id="itemList"></div>
+            <a href="Login.html">Volver al Login</a>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getDatabase, ref, set, get, child, remove } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBHFoLCAodmsfESlKjdA79ApNnw7zBt6AE",
+            authDomain: "canchitascoz.firebaseapp.com",
+            databaseURL: "https://canchitascoz-default-rtdb.firebaseio.com/",
+            projectId: "canchitascoz",
+            storageBucket: "canchitascoz.appspot.com",
+            messagingSenderId: "396510823117",
+            appId: "1:396510823117:web:6f2da316661ae1f0945f84"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        const itemList = document.getElementById('itemList');
+        let editingItemKey = null;
+
+        function displayItems() {
+            get(child(ref(database), 'items')).then((snapshot) => {
+                itemList.innerHTML = '';
+                if (snapshot.exists()) {
+                    const items = snapshot.val();
+                    for (const key in items) {
+                        const item = items[key];
+                        const itemDiv = document.createElement('div');
+                        itemDiv.classList.add('item');
+                        itemDiv.innerHTML = `
+                            <span>${item.FechaCancha} - ${item.HorarioCancha} - ${item.TipoCancha}</span>
+                            <button class="edit-button" onclick="editItem('${key}', '${item.FechaCancha}', '${item.HorarioCancha}', '${item.TipoCancha}')">Editar</button>
+                            <button onclick="deleteItem('${key}')">Eliminar</button>
+                        `;
+                        itemList.appendChild(itemDiv);
+                    }
+                } else {
+                    itemList.innerHTML = 'No hay elementos disponibles.';
+                }
+            });
+        }
+
+        document.getElementById('addButton').addEventListener('click', () => {
+            const FechaCancha = document.getElementById('FechaInput').value;
+            const HorarioCancha = document.getElementById('HorarioInput').value;
+            const TipoCancha = document.getElementById('TipoCanchaInput').value;
+
+            if (editingItemKey) {
+                const itemRef = ref(database, 'items/' + editingItemKey);
+                set(itemRef, {
+                    FechaCancha: FechaCancha,
+                    HorarioCancha: HorarioCancha,
+                    TipoCancha: TipoCancha
+                }).then(() => {
+                    displayItems();
+                    resetForm();
+                }).catch((error) => {
+                    console.error('Error al actualizar elemento:', error);
+                });
+            } else {
+                const newItemRef = ref(database, 'items/' + Date.now());
+                set(newItemRef, {
+                    FechaCancha: FechaCancha,
+                    HorarioCancha: HorarioCancha,
+                    TipoCancha: TipoCancha
+                }).then(() => {
+                    displayItems();
+                    resetForm();
+                }).catch((error) => {
+                    console.error('Error al agregar elemento:', error);
+                });
+            }
+        });
+
+        window.deleteItem = (key) => {
+            const itemRef = ref(database, 'items/' + key);
+            remove(itemRef).then(() => {
+                displayItems();
+            }).catch((error) => {
+                console.error('Error al eliminar elemento:', error);
+            });
+        };
+
+        window.editItem = (key, fecha, horario, tipo) => {
+            editingItemKey = key;
+            document.getElementById('FechaInput').value = fecha;
+            document.getElementById('HorarioInput').value = horario;
+            document.getElementById('TipoCanchaInput').value = tipo;
+            document.getElementById('addButton').textContent = 'Actualizar'; // Cambiar texto del botón
+        };
+
+        function resetForm() {
+            editingItemKey = null;
+            document.getElementById('FechaInput').value = '';
+            document.getElementById('HorarioInput').value = '';
+            document.getElementById('TipoCanchaInput').value = '';
+            document.getElementById('addButton').textContent = 'Agregar'; // Volver a texto original
+        }
+
+        displayItems();
+    </script>
+</body>
+</html>

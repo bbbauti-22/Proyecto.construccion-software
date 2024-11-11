@@ -1,0 +1,72 @@
+
+body{
+    text-align:center;
+    background: #8fc1ce ;
+    padding-top: 30px;
+}
+.boton{
+    
+    text-shadow: 0px 1px rgba(0, 0, 0, 0.2) ;
+        text-align:center ;
+        text-decoration: none ;
+    font-family: 'helvetica Neue', helvetica,sans-serif ;
+    display:inline-block ;
+    color: #fff; 
+    padding: 15px 30px ;
+    white-space: nowrap ;
+    -webkit-border-radius: 15px ;
+    -moz-border-radius: 5px ;
+    border-radius: 100px;
+    margin: 1px 20px 0px 30px ;
+    -webkit-transition: all 0.2s ease-in-out ;
+    -ms-transition: all 0.2s ease-in-out ;
+    -moz-transition: all 0.2s ease-in-out ;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out ;
+}
+.azul{
+background: #060aff ;
+box-shadow: 5px 5px 0px 0px #0b115e;
+}
+.azul:hover{
+    background: #1892f7da
+    
+}
+
+.rojo{
+background: #ff0606 ;
+box-shadow: 5px 5px 0px 0px #af0e0e ;
+}
+.rojo:hover{
+background:#c91d11 ;
+box-shadow: 5px 5px 0px 0px ;}
+.rojo:active {
+    background: blue ;
+    box-shadow: 15px 15px 15px 15px #ff0606 ;
+
+}
+
+
+#tablero { 
+position:sticky;
+
+}
+#tablero2{
+    position: inherit;
+    
+    
+    
+}
+.class1 {
+    
+    float:left;
+    padding-top: 450px;
+  
+   
+}
+.class2 {
+
+   float:right;
+   padding-top:450px;
+ 
+}

@@ -1,0 +1,74 @@
+:root {
+    colorPrincipal: blue ;
+    tamanio: 200px ;
+}
+
+P{
+    height: tamanio ;
+    background: colorPrincipal ;
+}
+
+
+body{
+    text-align:center;
+    background: #ECF0F1 ;
+    padding-top: 680px;
+}
+.boton{
+    
+        text-shadow: 0px 1px rgba(0, 0, 0, 0.2) ;
+            text-align:center ;
+            text-decoration: none ;
+        font-family: 'helvetica Neue', helvetica,sans-serif ;
+        display:inline-block ;
+        color: #fff; 
+        padding: 150px 300px ;
+        white-space: nowrap ;
+        -webkit-border-radius: 5px ;
+        -moz-border-radius: 5px ;
+        border-radius: 100px;
+        margin: 10px 5px ;
+        -webkit-transition: all 0.2s ease-in-out ;
+        -ms-transition: all 0.2s ease-in-out ;
+        -moz-transition: all 0.2s ease-in-out ;
+        -o-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out ;
+}
+.azul{
+  background: #060aff ;
+  box-shadow: 0px 5px 0px 0px ;
+}
+
+.rojo{
+   background: #ff0606 ;
+   box-shadow: 0px 5px 0px 0px #ff0606 ;
+}
+.rojo:hover{
+    background:#06ff6e ;
+    box-shadow: 0px 5px 0px 0px ;}
+    .rojo:active {
+        background: blue ;
+        box-shadow: 15px 15px 15px 15px #ff0606 ;
+
+    }
+
+.verde{
+    background: #0eff06 ;
+    box-shadow: 0px 5px 0px 0px#06ff6e;
+}
+#tablero { 
+    margin-top: 10px ;
+    background: url(web), url(https://yt3.ggpht.com/-FJXWJ1x1bEQ/AAAAAAAAAAI/AAAAAAAAAAA/ZtyuZ-elFr4/s900-c-k-no-mo-rj-c0xffffff/photo.jpg) ;
+    box-shadow: 0 10px -6px 10px rgba (0,0,0.6) ;
+    border-radius: 3px, 3px;
+    border-collapse: collapse; 
+    height: 500px; 
+    width: 500px; 
+    position: absolute ;
+    top:5px;
+    right: 0 ;
+    bottom: 0;
+    left: 0;
+    margin:Auto ;
+    padding:150px 300px ;
+}
